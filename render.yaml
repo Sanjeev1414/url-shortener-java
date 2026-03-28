@@ -1,0 +1,50 @@
+services:
+  # Spring Boot Application Service
+  - type: web
+    name: url-shortener
+    runtime: docker
+    buildCommand: docker build -t url-shortener .
+    startCommand: java -jar target/url-shortener-0.0.1-SNAPSHOT.jar
+    envVars:
+      - key: PORT
+        fromService:
+          type: web
+          name: url-shortener
+          property: port
+      - key: DATABASE_URL
+        fromService:
+          type: pserv
+          name: url-shortener-db
+          property: connectionString
+      - key: DB_USER
+        fromService:
+          type: pserv
+          name: url-shortener-db
+          property: user
+      - key: DB_PASSWORD
+        fromService:
+          type: pserv
+          name: url-shortener-db
+          property: password
+    healthCheckPath: /
+    disk:
+      name: url-shortener-data
+      mountPath: /data
+      sizeGB: 1
+
+  # MySQL Database Service
+  - type: pserv
+    name: url-shortener-db
+    runtime: mysql
+    version: "8.0"
+    disk:
+      name: mysql-data
+      mountPath: /var/lib/mysql
+      sizeGB: 10
+    envVars:
+      - key: MYSQL_DATABASE
+        value: urlshortener
+      - key: MYSQL_USER
+        value: urlshortener_user
+      - key: MYSQL_PASSWORD
+        generateValue: true

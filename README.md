@@ -27,28 +27,48 @@ A complete full-stack URL Shortener application built with Java, Spring Boot, My
 3. Create a MySQL database named `urlshortener`
 4. Run the application: `mvn spring-boot:run`
 
-## 🚀 Deployment to Railway
+## 🚀 Deployment to Render
 
-### Step 1: Create Railway Account
-1. Go to [Railway.app](https://railway.app)
-2. Sign up/Sign in with GitHub
+### Step 1: Create Render Account
+1. Go to [Render.com](https://render.com)
+2. Sign up/Sign in with GitHub, GitLab, or Google
 
 ### Step 2: Deploy from GitHub
-1. Click "New Project" → "Deploy from GitHub repo"
+1. Click **"New"** → **"Blueprint"**
 2. Connect your GitHub account
-3. Select this repository
-4. Click "Deploy"
+3. Select this repository: `url-shortener-java`
+4. Render will automatically detect the `render.yaml` file
+5. Click **"Apply"** to create the services
 
-### Step 3: Add MySQL Database
-1. In your Railway project, click "Add Plugin"
-2. Search for "MySQL" and add it
-3. The database will be automatically configured
+### Step 3: Services Created
+Render will automatically create:
+- **Web Service**: Your Spring Boot application
+- **MySQL Database**: Persistent database service
 
 ### Step 4: Get Your Live URL
-1. Once deployment is complete, Railway will provide a live URL
-2. Your app will be accessible at: `https://your-project-name.up.railway.app`
+1. Once deployment completes (usually takes 5-10 minutes), go to your dashboard
+2. Find your web service and click on it
+3. Your live URL will be displayed (e.g., `https://url-shortener.onrender.com`)
 
 ## API Endpoints
+
+### Shorten URL
+- **POST** `/api/shorten`
+- **Body**: `{"url": "https://example.com"}`
+- **Response**: `{"originalUrl": "https://example.com", "shortUrl": "https://your-domain.com/abc123", "shortCode": "abc123"}`
+
+### Shorten URL with Custom Code
+- **POST** `/api/shorten/custom`
+- **Body**: `{"url": "https://example.com", "customCode": "mycode"}`
+- **Response**: `{"originalUrl": "https://example.com", "shortUrl": "https://your-domain.com/mycode", "shortCode": "mycode"}`
+
+### Redirect to Original URL
+- **GET** `/{shortCode}`
+- Redirects to the original URL and increments click count
+
+### Get URL Statistics
+- **GET** `/api/stats/{shortCode}`
+- **Response**: `{"originalUrl": "https://example.com", "shortCode": "abc123", "clickCount": 5, "createdAt": "2023-..."}`
 
 ### Shorten URL
 - **POST** `/api/shorten`
