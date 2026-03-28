@@ -1,0 +1,5 @@
+com\urlshortener\UrlShortenerApplication.class
+com\urlshortener\repository\UrlRepository.class
+com\urlshortener\controller\UrlController.class
+com\urlshortener\model\Url.class
+com\urlshortener\service\UrlService.class

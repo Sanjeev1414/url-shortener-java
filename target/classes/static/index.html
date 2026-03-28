@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Shortener</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-link"></i> URL Shortener</h1>
+            <p>Shorten your long URLs into manageable links</p>
+        </header>
+
+        <main>
+            <div class="shortener-section">
+                <div class="form-container">
+                    <form id="urlForm">
+                        <div class="input-group">
+                            <label for="originalUrl">Enter URL to shorten:</label>
+                            <input type="url" id="originalUrl" placeholder="https://example.com" required>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="customCode">Custom short code (optional):</label>
+                            <input type="text" id="customCode" placeholder="my-custom-link" pattern="[A-Za-z0-9]+" title="Only letters and numbers allowed">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-magic"></i> Shorten URL
+                        </button>
+                    </form>
+                </div>
+
+                <div id="result" class="result hidden">
+                    <div class="result-card">
+                        <h3>Success! <i class="fas fa-check-circle"></i></h3>
+                        <div class="result-content">
+                            <p><strong>Original URL:</strong> <span id="originalUrlDisplay"></span></p>
+                            <p><strong>Short URL:</strong> <a id="shortUrlLink" href="#" target="_blank"></a></p>
+                            <p><strong>Short Code:</strong> <code id="shortCodeDisplay"></code></p>
+                        </div>
+                        <div class="result-actions">
+                            <button id="copyBtn" class="btn btn-secondary">
+                                <i class="fas fa-copy"></i> Copy Link
+                            </button>
+                            <button id="statsBtn" class="btn btn-info">
+                                <i class="fas fa-chart-bar"></i> View Stats
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="stats" class="stats hidden">
+                    <div class="stats-card">
+                        <h3>URL Statistics <i class="fas fa-chart-line"></i></h3>
+                        <div class="stats-content">
+                            <div class="stat-item">
+                                <span class="stat-label">Original URL:</span>
+                                <span class="stat-value" id="statsOriginalUrl"></span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Short Code:</span>
+                                <span class="stat-value" id="statsShortCode"></span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Click Count:</span>
+                                <span class="stat-value" id="statsClickCount">0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Created:</span>
+                                <span class="stat-value" id="statsCreatedAt"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="features-section">
+                <h2>Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-bolt feature-icon"></i>
+                        <h4>Fast & Reliable</h4>
+                        <p>Lightning-fast URL shortening with 99.9% uptime</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-chart-bar feature-icon"></i>
+                        <h4>Click Tracking</h4>
+                        <p>Monitor how many times your links are clicked</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-magic feature-icon"></i>
+                        <h4>Custom Codes</h4>
+                        <p>Create memorable custom short codes for your links</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-shield-alt feature-icon"></i>
+                        <h4>Secure</h4>
+                        <p>Built with security in mind, validates all URLs</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 URL Shortener. Built with Spring Boot & MySQL.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
