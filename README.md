@@ -1,6 +1,6 @@
 # URL Shortener Application
 
-A complete URL Shortener application built with Java, Spring Boot, MySQL, and JPA/Hibernate.
+A complete full-stack URL Shortener application built with Java, Spring Boot, MySQL, and JPA/Hibernate.
 
 ## Features
 
@@ -12,6 +12,7 @@ A complete URL Shortener application built with Java, Spring Boot, MySQL, and JP
 - URL validation
 - Handle duplicate URLs
 - Custom short URL option
+- Modern web interface
 
 ## Prerequisites
 
@@ -19,24 +20,45 @@ A complete URL Shortener application built with Java, Spring Boot, MySQL, and JP
 - MySQL 8.0 or higher
 - Maven 3.6 or higher
 
-## Setup
+## Local Development Setup
 
 1. Clone the repository
 2. Update `application.properties` with your MySQL credentials
 3. Create a MySQL database named `urlshortener`
 4. Run the application: `mvn spring-boot:run`
 
+## 🚀 Deployment to Railway
+
+### Step 1: Create Railway Account
+1. Go to [Railway.app](https://railway.app)
+2. Sign up/Sign in with GitHub
+
+### Step 2: Deploy from GitHub
+1. Click "New Project" → "Deploy from GitHub repo"
+2. Connect your GitHub account
+3. Select this repository
+4. Click "Deploy"
+
+### Step 3: Add MySQL Database
+1. In your Railway project, click "Add Plugin"
+2. Search for "MySQL" and add it
+3. The database will be automatically configured
+
+### Step 4: Get Your Live URL
+1. Once deployment is complete, Railway will provide a live URL
+2. Your app will be accessible at: `https://your-project-name.up.railway.app`
+
 ## API Endpoints
 
 ### Shorten URL
 - **POST** `/api/shorten`
 - **Body**: `{"url": "https://example.com"}`
-- **Response**: `{"originalUrl": "https://example.com", "shortUrl": "http://localhost:8080/abc123", "shortCode": "abc123"}`
+- **Response**: `{"originalUrl": "https://example.com", "shortUrl": "https://your-domain.com/abc123", "shortCode": "abc123"}`
 
 ### Shorten URL with Custom Code
 - **POST** `/api/shorten/custom`
 - **Body**: `{"url": "https://example.com", "customCode": "mycode"}`
-- **Response**: `{"originalUrl": "https://example.com", "shortUrl": "http://localhost:8080/mycode", "shortCode": "mycode"}`
+- **Response**: `{"originalUrl": "https://example.com", "shortUrl": "https://your-domain.com/mycode", "shortCode": "mycode"}`
 
 ### Redirect to Original URL
 - **GET** `/{shortCode}`
@@ -47,6 +69,69 @@ A complete URL Shortener application built with Java, Spring Boot, MySQL, and JP
 - **Response**: `{"originalUrl": "https://example.com", "shortCode": "abc123", "clickCount": 5, "createdAt": "2023-..."}`
 
 ## Sample API Requests (Postman)
+
+### Shorten URL
+```
+Method: POST
+URL: https://your-domain.com/api/shorten
+Headers: Content-Type: application/json
+Body:
+{
+    "url": "https://www.google.com"
+}
+```
+
+### Shorten with Custom Code
+```
+Method: POST
+URL: https://your-domain.com/api/shorten/custom
+Headers: Content-Type: application/json
+Body:
+{
+    "url": "https://www.google.com",
+    "customCode": "google"
+}
+```
+
+### Get Statistics
+```
+Method: GET
+URL: https://your-domain.com/api/stats/google
+```
+
+### Test Redirect
+```
+Method: GET
+URL: https://your-domain.com/google
+```
+(This will redirect to https://www.google.com)
+
+## Technology Stack
+
+- **Backend**: Java 17, Spring Boot 3.1.0
+- **Database**: MySQL 8.0
+- **ORM**: JPA/Hibernate
+- **Frontend**: HTML5, CSS3, JavaScript (Vanilla)
+- **Build Tool**: Maven
+- **Deployment**: Railway (Docker)
+
+## Architecture
+
+- **Controller Layer**: REST endpoints and web interface
+- **Service Layer**: Business logic and URL shortening
+- **Repository Layer**: Data access with JPA
+- **Model Layer**: JPA entities for database mapping
+
+## Environment Variables
+
+The application uses the following environment variables:
+
+- `PORT`: Server port (default: 8080)
+- `DATABASE_URL`: MySQL JDBC connection URL
+- `DB_USER`: Database username
+- `DB_PASSWORD`: Database password
+
+Railway automatically provides these for deployed applications.
 
 ### Shorten URL
 ```
